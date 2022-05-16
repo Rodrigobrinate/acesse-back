@@ -36,7 +36,7 @@ MongoClient.connect(connectionString,  (err, client) => {
       app.post('/remove',  async function  (req, res) {
         const db = client.db('acesse')
         const quotesCollection = await db.collection('coffee').deleteOne({colaborador: req.body.colaborador})
-        
+        res.json({msg: "sucesso"})
       })
   })
 
