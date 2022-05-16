@@ -3,6 +3,9 @@ const app = express();
 const bodyParser= require('body-parser')
 var cors = require('cors')
 
+var porta = process.env.PORT || 3001;
+
+
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -43,6 +46,6 @@ MongoClient.connect(connectionString,  (err, client) => {
 
 
 
-app.listen(8080  , function() {
+app.listen(porta  , function() {
     console.log('listening on 3000')
   })
