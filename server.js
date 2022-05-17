@@ -20,7 +20,7 @@ MongoClient.connect(connectionString,  (err, client) => {
     app.get('/',  async function  (req, res) {
         const db = client.db('acesse')
         const quotesCollection = await db.collection('coffee').find().toArray()
-        //console.log(quotesCollection)
+        console.log(quotesCollection)
         res.json(quotesCollection)
       })
       app.post('/add',  async function  (req, res) {
@@ -36,7 +36,7 @@ MongoClient.connect(connectionString,  (err, client) => {
             res.json({st: 0, msg: "espere um colaborador voltar :)"})
           }else{
               const quotesCollection = await db.collection('coffee') 
-              quotesCollection.insertOne({colaborador: req.body.colaborador})
+              quotesCollection.insertOne({colaborador: req.body.colaborador, data: new  Date()})
               res.json({st: 1, msg: "colaborador em horário de café"}) 
        }
          }
