@@ -25,15 +25,20 @@ MongoClient.connect(connectionString,  (err, client) => {
       })
       app.post('/add',  async function  (req, res) {
         const db = client.db('acesse')
-        console.log( await db.collection('coffee').find().toArray())
-        if ( db.collection('coffee').find().toArray.length < 3){
-
-       
-        const quotesCollection = await db.collection('coffee') 
-        quotesCollection.insertOne({colaborador: req.body.colaborador})
-        res.json({st: 1, msg: "colaborador em horário de café"})
-        }else{
-             res.json({st: 0, msg: "espere um colaborador voltar :)"})
+        var a = await (await db.collection('coffee').find().toArray())
+        //console.log(a)
+        var b = await (db.collection('coffee').find({ colaborador:req.body.colaborador  }).toArray())
+          console.log(b.length)
+        if ( b.length  >= 1){
+          res.json({st: 0, msg: "o colaborador já está no café"})
+          }else{
+             if ( a.length >= 3){
+            res.json({st: 0, msg: "espere um colaborador voltar :)"})
+          }else{
+              const quotesCollection = await db.collection('coffee') 
+              quotesCollection.insertOne({colaborador: req.body.colaborador})
+              res.json({st: 1, msg: "colaborador em horário de café"}) 
+       }
          }
       }) 
       app.post('/remove',  async function  (req, res) {
