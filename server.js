@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser= require('body-parser')
 var cors = require('cors')
-const db = client.db('acesse')
+
 var porta = process.env.PORT || 3001;
 
 
