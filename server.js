@@ -56,10 +56,10 @@ MongoClient.connect(connectionString,  (err, client) => {
       })
 
       app.get('/historic',  async function  (req, res) {
-        
-        const quotesCollection = await db.collection('coffee-historic').find({day: new  Date().getDate(), month: new  Date().getMonth(), year: new  Date().getFullYear()}).toArray()
-      //  console.log(quotesCollection)
-        res.json(quotesCollection)
+        const db = client.db('acesse')
+        const colaborador = await db.collection('coffee-historic').find({day: new  Date().getDate(), month: new  Date().getMonth(), year: new  Date().getFullYear()}).toArray()
+      //  console.log(colaborador)
+        res.json(colaborador)
       })
 
 
