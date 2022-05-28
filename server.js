@@ -61,6 +61,14 @@ MongoClient.connect(connectionString,  (err, client) => {
       //  console.log(colaborador)
         res.json(colaborador)
       })
+      
+
+      app.get('/historic2',  async function  (req, res) {
+        const db = client.db('acesse')
+        const colaborador = await db.collection('coffee-historic').find({ month: new  Date().getMonth(), year: new  Date().getFullYear()}).toArray()
+      //  console.log(colaborador)
+        res.json(colaborador)
+      })
 
 
       app.post('/remove',  async function  (req, res) {
